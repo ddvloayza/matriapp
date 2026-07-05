@@ -1,0 +1,773 @@
+:root {
+  --paper: #fdf9f2;
+  --paper-deep: #fff8ee;
+  --cream: #f5f0e6;
+  --gold: #b8940a;
+  --gold-soft: #d4a832;
+  --ink: #5a3c00;
+  --muted: #8f711d;
+  --line: rgba(212, 168, 50, 0.42);
+  --shadow: 0 26px 70px rgba(94, 63, 5, 0.16);
+  --font-cinzel: "Cinzel", Georgia, serif;
+  --font-cormorant: "Cormorant Garamond", Georgia, serif;
+  --font-great-vibes: "Great Vibes", "Brush Script MT", cursive;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #f7f0e5;
+  color: var(--ink);
+  font-family: var(--font-cormorant), serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+.page {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 168px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0 24px;
+}
+
+.brand {
+  color: #8a5c00;
+  font-family: var(--font-great-vibes), cursive;
+  font-size: clamp(30px, 5vw, 42px);
+  line-height: 1;
+  text-decoration: none;
+}
+
+.navLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.navLinks a,
+.button {
+  border: 1.5px solid var(--gold);
+  background: rgba(253, 249, 242, 0.74);
+  color: var(--ink);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 12px 18px;
+  font-family: var(--font-cinzel), serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  line-height: 1.2;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.navLinks a {
+  min-height: 38px;
+  padding: 10px 13px;
+  font-size: 10px;
+}
+
+.button:hover,
+.button.primary,
+.navLinks a:hover {
+  background: var(--gold);
+  color: var(--paper);
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button:disabled {
+  cursor: progress;
+  opacity: 0.72;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.invitationCard,
+.panel {
+  position: relative;
+  border: 2px solid var(--gold);
+  background: rgba(253, 249, 242, 0.96);
+  box-shadow: var(--shadow);
+}
+
+.invitationCard {
+  display: grid;
+  align-content: center;
+  width: 100%;
+  min-height: 760px;
+  padding: 74px 62px 62px;
+  text-align: center;
+}
+
+.countdownPanel {
+  margin-top: 18px;
+  border: 2px solid var(--gold);
+  background: rgba(253, 249, 242, 0.92);
+  box-shadow: var(--shadow);
+  padding: 24px 28px 28px;
+  text-align: center;
+}
+
+.countdownGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.timeBox {
+  display: grid;
+  place-items: center;
+  min-height: 92px;
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
+  padding: 14px 10px;
+}
+
+.timeBox strong {
+  color: #8a5c00;
+  font-family: var(--font-cinzel), serif;
+  font-size: clamp(28px, 5vw, 48px);
+  line-height: 1;
+}
+
+.timeBox span {
+  margin-top: 8px;
+  color: var(--muted);
+  font-family: var(--font-cinzel), serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.innerBorder {
+  position: absolute;
+  inset: 16px;
+  border: 0.5px solid rgba(212, 168, 50, 0.46);
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border-color: var(--gold);
+}
+
+.corner::before,
+.corner::after {
+  content: "";
+  position: absolute;
+  background: var(--gold);
+}
+
+.corner::before {
+  width: 100%;
+  height: 1.5px;
+}
+
+.corner::after {
+  width: 1.5px;
+  height: 100%;
+}
+
+.cornerTl {
+  top: 8px;
+  left: 8px;
+}
+
+.cornerTr {
+  top: 8px;
+  right: 8px;
+  transform: scaleX(-1);
+}
+
+.cornerBl {
+  bottom: 8px;
+  left: 8px;
+  transform: scaleY(-1);
+}
+
+.cornerBr {
+  right: 8px;
+  bottom: 8px;
+  transform: scale(-1);
+}
+
+.eyebrow,
+.sectionTitle {
+  color: #8a6a10;
+  font-family: var(--font-cinzel), serif;
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  margin: 0 0 22px;
+}
+
+.sectionTitle {
+  margin: 0 0 14px;
+}
+
+.subtle {
+  margin: 0;
+  color: #6b4f18;
+  font-size: 18px;
+  font-style: italic;
+  letter-spacing: 0.4px;
+  line-height: 1.45;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.divider i {
+  width: 110px;
+  max-width: 28%;
+  height: 0.5px;
+  background: linear-gradient(90deg, transparent, #c9922a, transparent);
+}
+
+.divider span {
+  width: 6px;
+  height: 6px;
+  background: #c9922a;
+  transform: rotate(45deg);
+}
+
+.names {
+  margin: 12px 0;
+  color: #8a5c00;
+  font-family: var(--font-great-vibes), cursive;
+  font-size: clamp(48px, 8vw, 76px);
+  font-weight: 400;
+  line-height: 1.02;
+}
+
+.names span {
+  display: block;
+  color: var(--gold);
+  font-size: clamp(38px, 6vw, 54px);
+}
+
+.dateBlock {
+  margin: 24px 0 18px;
+}
+
+.dateBlock strong {
+  display: block;
+  color: #8a5c00;
+  font-family: var(--font-cinzel), serif;
+  font-size: clamp(58px, 11vw, 82px);
+  letter-spacing: 6px;
+  line-height: 1;
+}
+
+.dateBlock span {
+  display: block;
+  margin-top: 8px;
+  color: #a07820;
+  font-family: var(--font-cinzel), serif;
+  font-size: 14px;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+}
+
+.detailsLine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 16px;
+}
+
+.detailsLine div {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+}
+
+.detailsLine small {
+  color: #b09040;
+  font-family: var(--font-cinzel), serif;
+  font-size: 8px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.detailsLine span {
+  color: #7a5000;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.detailsLine i {
+  width: 0.5px;
+  height: 36px;
+  background: linear-gradient(180deg, transparent, rgba(201, 146, 42, 0.55), transparent);
+}
+
+.sectionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.panel {
+  padding: 26px;
+}
+
+.widePanel {
+  margin-top: 24px;
+}
+
+.infoBox,
+.giftCard,
+.paymentCard {
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
+}
+
+.infoBox {
+  padding: 16px 18px;
+}
+
+.infoBox h2 {
+  margin: 0 0 5px;
+  color: #8a5c00;
+  font-family: var(--font-cinzel), serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.infoBox p {
+  margin: 0;
+  color: #7a5000;
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+.giftHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 18px;
+}
+
+.giftGrid,
+.floatingPaymentsTrack {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.giftCard {
+  min-height: 76px;
+  padding: 16px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.paymentCard {
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
+  color: var(--ink);
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  min-width: 210px;
+  text-align: left;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.paymentCardButton {
+  appearance: none;
+  cursor: pointer;
+}
+
+.paymentCardButton:hover {
+  border-color: var(--gold);
+  background: #fffaf0;
+  transform: translateY(-1px);
+}
+
+.paymentCard span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: #8a5c00;
+  font-family: var(--font-cinzel), serif;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+.paymentCard span i {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--line);
+  color: var(--gold);
+  font-family: var(--font-cormorant), serif;
+  font-size: 15px;
+  font-style: normal;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.paymentCard strong {
+  font-size: 18px;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.paymentCard em {
+  color: var(--ink);
+  font-size: 14px;
+  font-style: normal;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.paymentCard small {
+  color: var(--muted);
+  font-size: 14px;
+  font-style: italic;
+}
+
+.paymentActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin-top: 5px;
+}
+
+.paymentActions button {
+  border: 1px solid var(--line);
+  background: rgba(253, 249, 242, 0.84);
+  color: #8a5c00;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 7px 9px;
+  font-family: var(--font-cinzel), serif;
+  font-size: 9px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.paymentActions button:hover {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: var(--paper);
+}
+
+.paymentActions i {
+  font-style: normal;
+  letter-spacing: 0;
+}
+
+.floatingPayments {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  width: 100%;
+  border-top: 2px solid var(--gold);
+  background: rgba(253, 249, 242, 0.96);
+  box-shadow: 0 18px 48px rgba(94, 63, 5, 0.2);
+  padding: 12px max(16px, calc((100vw - 1120px) / 2));
+}
+
+.floatingPaymentsTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: #8a6a10;
+  font-family: var(--font-cinzel), serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.floatingPaymentsTitle strong {
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
+  color: var(--ink);
+  padding: 5px 8px;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.floatingPaymentsTrack {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+
+.floatingPayments .paymentCard {
+  flex: 1 0 220px;
+  padding: 10px 12px;
+}
+
+.floatingPayments .paymentCard strong {
+  font-size: 16px;
+}
+
+.floatingPayments .paymentCard small {
+  font-size: 13px;
+}
+
+.footerNote {
+  position: relative;
+  margin-top: 28px;
+  text-align: center;
+}
+
+.footerNote p {
+  margin: 0;
+  color: var(--gold);
+  font-family: var(--font-great-vibes), cursive;
+  font-size: 34px;
+}
+
+.hiddenRsvpLink {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.privatePage {
+  min-height: 100vh;
+}
+
+.privateShell {
+  display: grid;
+  place-items: center;
+  min-height: calc(100vh - 142px);
+}
+
+.privatePanel {
+  width: min(620px, 100%);
+}
+
+.form {
+  display: grid;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.form label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-family: var(--font-cinzel), serif;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+.form input,
+.form select,
+.form textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  outline: none;
+  background: var(--paper-deep);
+  color: var(--ink);
+  padding: 12px 13px;
+  font-family: var(--font-cormorant), serif;
+  font-size: 18px;
+  letter-spacing: 0;
+}
+
+.form textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+.form small {
+  color: var(--muted);
+  font-family: var(--font-cormorant), serif;
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.guestWelcome {
+  display: grid;
+  gap: 4px;
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
+  padding: 15px 16px;
+}
+
+.guestWelcome span {
+  color: var(--muted);
+  font-family: var(--font-cinzel), serif;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+.guestWelcome strong {
+  color: #8a5c00;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.notice {
+  margin: 16px 0 0;
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
+  color: var(--ink);
+  padding: 12px 14px;
+  font-size: 17px;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+@media (max-width: 920px) {
+  .sectionGrid,
+  .giftHeader {
+    grid-template-columns: 1fr;
+  }
+
+  .invitationCard {
+    min-height: auto;
+  }
+
+  .giftHeader .button {
+    width: fit-content;
+  }
+}
+
+@media (max-width: 660px) {
+  .page {
+    width: min(100% - 20px, 560px);
+    padding-top: 16px;
+    padding-bottom: 178px;
+  }
+
+  .nav {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .navLinks {
+    justify-content: flex-start;
+  }
+
+  .invitationCard,
+  .panel {
+    padding: 40px 22px 34px;
+  }
+
+  .countdownPanel {
+    padding: 22px 18px;
+  }
+
+  .countdownGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .detailsLine {
+    gap: 20px;
+  }
+
+  .corner {
+    width: 48px;
+    height: 48px;
+  }
+
+  .button,
+  .navLinks a {
+    width: 100%;
+  }
+
+  .giftHeader .button {
+    width: 100%;
+  }
+
+  .floatingPayments {
+    padding: 10px;
+  }
+
+  .floatingPayments .paymentCard {
+    flex-basis: 225px;
+  }
+
+  .floatingPaymentsTitle {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 7px;
+  }
+}
