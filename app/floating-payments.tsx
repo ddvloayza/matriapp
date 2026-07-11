@@ -34,6 +34,7 @@ const payments: Payment[] = [
 
 export default function FloatingPayments() {
   const [copied, setCopied] = useState("");
+  const [open, setOpen] = useState(false);
 
   async function copyText(value: string, label: string) {
     try {
@@ -60,7 +61,19 @@ export default function FloatingPayments() {
   }
 
   return (
-    <aside className="floatingPayments" aria-label="Medios de pago">
+    <aside
+      className={`floatingPayments ${open ? "floatingPaymentsOpen" : ""}`}
+      aria-label="Medios de pago"
+    >
+      <button
+        className="floatingPaymentsBubble"
+        type="button"
+        onClick={() => setOpen((current) => !current)}
+        aria-expanded={open}
+      >
+        <span>Donaciones</span>
+        <i aria-hidden="true">{open ? "×" : "⧉"}</i>
+      </button>
       <div className="floatingPaymentsTitle">
         <span>Yape, Plin y cuentas</span>
         {copied ? <strong role="status">{copied}</strong> : null}

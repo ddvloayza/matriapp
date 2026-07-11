@@ -2,44 +2,14 @@ import Link from "next/link";
 import Countdown from "./countdown";
 import FloatingPayments from "./floating-payments";
 
-const gifts = [
-  "Cama Queen",
-  "Colchón para cama Queen",
-  "Sofá / sillón sala",
-  "Mesa de comedor + sillas (4 sillas)",
-  "2 Mesas de noche",
-  "Sábanas + almohadas + frazada (Cama Queen)",
-  "Refrigeradora",
-  "Microondas",
-  "Licuadora",
-  "Hervidor eléctrico",
-  "Plancha de ropa + Planchador",
-  "Cafetera",
-  "Freidora de aire",
-  "Arrocera",
-  "Aspiradora",
-  "Waflera",
-  "Ventilador",
-  "Soundbar",
-  "Batidora",
-  "Aspiradora de mano",
-  "Vajilla + cubiertos + vasos",
-  "Juego de ollas + sartén",
-  "Toallas (set completo) Colores Claros",
-  "Juegos de Copas",
-  "Organizadores (Para Closet, Baño)",
-  "Juego de Cuchillos + Tabla de Picar",
-  "Tetera de aluminio + Juego de Tazas"
-];
-
 export default function Home() {
   return (
     <main className="page">
       <nav className="nav" aria-label="Navegación principal">
         <div className="brand">Julio & Jackeline</div>
         <div className="navLinks">
-          <a href="#detalles">Detalles</a>
-          <a href="#regalos">Regalos</a>
+          <Link href="/confirmar">Confirma tu asistencia</Link>
+          <Link href="/regalos">Regalos</Link>
         </div>
       </nav>
 
@@ -94,34 +64,6 @@ export default function Home() {
             <p>Santiago de Surco, Lima<br />6:30 p.m.<br />A espaldas del Jockey Plaza</p>
           </div>
         </article>
-      </section>
-
-      <section id="regalos" className="panel widePanel">
-        <div className="giftHeader">
-          <div>
-            <p className="sectionTitle">Lista de Regalos</p>
-            <p className="subtle">
-              Si desean acompañarnos con un detalle, estas son algunas ideas para
-              nuestro nuevo hogar.
-            </p>
-          </div>
-          <a
-            className="button primary"
-            href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTd-mHNgLhn_oX4_dGEQ9VN-0y_wuPvEL69BAOeo0a0FMGG0avTUvXWyqFQ5iYiG9f810zBDIm1Oacg/pubhtml"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Ver lista completa
-          </a>
-        </div>
-
-        <div className="giftGrid">
-          {gifts.map((gift) => (
-            <div className="giftCard" key={gift}>
-              {gift}
-            </div>
-          ))}
-        </div>
       </section>
 
       <footer className="footerNote">

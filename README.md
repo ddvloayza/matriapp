@@ -1,6 +1,6 @@
 # Matriapp
 
-Landing de boda en Next.js para Julio & Jackeline, con una vista oculta de confirmación por DNI respaldada por DynamoDB.
+Landing de boda en Next.js para Julio & Jackeline, con una vista de confirmación por familia respaldada por Google Sheets.
 
 ## Desarrollo
 
@@ -11,30 +11,29 @@ npm run dev
 
 Luego abre `http://localhost:3000`.
 
-La vista pública es `/`. La confirmación queda en `/confirmar` y valida el DNI contra DynamoDB antes de mostrar el formulario.
+La vista pública es `/`. La confirmación queda en `/confirmar` y valida el nombre de familia o jefe de familia contra Google Sheets antes de mostrar el formulario.
 
 ## Variables de entorno
 
 Copia `env.example` a `.env.local` y completa:
 
 ```bash
-AWS_REGION=us-east-1
-DYNAMODB_GUESTS_TABLE=WeddingGuests
+GOOGLE_SHEETS_GUESTS_CSV_URL=https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/export?format=csv&gid=0
+GOOGLE_SHEETS_RSVP_WEBHOOK_URL=https://script.google.com/macros/s/APPS_SCRIPT_DEPLOYMENT_ID/exec
 ```
 
-En local puedes usar `AWS_ACCESS_KEY_ID` y `AWS_SECRET_ACCESS_KEY`. En producción es mejor usar un rol IAM del proveedor donde despliegues.
+`GOOGLE_SHEETS_GUESTS_CSV_URL` debe apuntar a la pestaña pública de invitados en formato CSV. `GOOGLE_SHEETS_RSVP_WEBHOOK_URL` debe apuntar a un Apps Script publicado como web app para registrar confirmaciones.
 
-## DynamoDB
+## Google Sheets
 
-Tabla sugerida: `WeddingGuests`
+Pestaña sugerida para invitados:
 
-Partition key:
+Columnas usadas por la app:
 
-- `dni` string
-
-Atributos usados por la app:
-
+- `guestId` string
 - `fullName` string
+- `familyName` string
+- `headName` string
 - `maxGuests` number
 - `phone` string opcional
 - `status` string
@@ -48,8 +47,10 @@ Ejemplo de item:
 
 ```json
 {
-  "dni": "12345678",
-  "fullName": "Maria Perez",
+  "guestId": "1",
+  "fullName": "Familia Martinez",
+  "familyName": "Martinez",
+  "headName": "Julio Martinez",
   "maxGuests": 2,
   "status": "pending"
 }

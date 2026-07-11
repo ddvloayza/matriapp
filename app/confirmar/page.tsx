@@ -4,8 +4,10 @@ import { FormEvent, useState } from "react";
 import Link from "next/link";
 
 type Guest = {
-  dni: string;
+  guestId: string;
   fullName: string;
+  familyName: string;
+  headName: string;
   maxGuests: number;
   phone: string;
   attendance: string;
@@ -15,7 +17,7 @@ type Guest = {
 };
 
 export default function ConfirmarPage() {
-  const [dni, setDni] = useState("");
+  const [search, setSearch] = useState("");
   const [guest, setGuest] = useState<Guest | null>(null);
   const [attendance, setAttendance] = useState("yes");
   const [guestsCount, setGuestsCount] = useState(1);
@@ -33,14 +35,14 @@ export default function ConfirmarPage() {
     const response = await fetch("/api/guest", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ dni })
+      body: JSON.stringify({ search })
     });
     const data = await response.json();
     setLoading(false);
 
     if (!response.ok) {
       setGuest(null);
-      setNotice(data.message || "No pudimos validar el DNI.");
+      setNotice(data.message || "No pudimos validar el nombre.");
       return;
     }
 
@@ -63,7 +65,8 @@ export default function ConfirmarPage() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        dni: guest.dni,
+        guestId: guest.guestId,
+        fullName: guest.fullName,
         attendance,
         guestsCount,
         phone,
@@ -88,28 +91,31 @@ export default function ConfirmarPage() {
         <Link className="brand" href="/">
           Julio & Jackeline
         </Link>
+        <div className="navLinks">
+          <Link href="/">Invitación</Link>
+          <Link href="/regalos">Regalos</Link>
+        </div>
       </nav>
 
       <section className="privateShell">
         <article className="panel privatePanel">
           <p className="sectionTitle">Confirmar Asistencia</p>
           <p className="subtle">
-            Ingresa tu DNI para acceder a tu invitación registrada y confirmar tu respuesta.
+            Ingresa el nombre de tu familia o el nombre del jefe de familia para acceder a tu invitación.
           </p>
 
           {!guest ? (
             <form className="form" onSubmit={findGuest}>
               <label>
-                DNI
+                Familia o jefe de familia
                 <input
-                  inputMode="numeric"
-                  maxLength={8}
-                  pattern="[0-9]{8}"
-                  placeholder="Ingresa 8 dígitos"
+                  autoComplete="name"
+                  placeholder="Ej. Familia Martinez"
                   required
-                  value={dni}
-                  onChange={(event) => setDni(event.target.value.replace(/\D/g, ""))}
+                  value={search}
+                  onChange={(event) => setSearch(event.target.value)}
                 />
+                <small>Ejemplos: Familia Martinez o Julio Martinez</small>
               </label>
               <button className="button primary" disabled={loading} type="submit">
                 {loading ? "Validando..." : "Ingresar"}
@@ -174,7 +180,7 @@ export default function ConfirmarPage() {
                 {loading ? "Guardando..." : "Guardar confirmación"}
               </button>
               <button className="button" type="button" onClick={() => setGuest(null)}>
-                Usar otro DNI
+                Buscar otro nombre
               </button>
             </form>
           )}

@@ -1,18 +1,21 @@
-import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
 import { NextResponse } from "next/server";
-import { dynamo, guestsTableName } from "@/lib/dynamodb";
+import { rsvpWebhookUrl } from "@/lib/sheets";
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
-  const dni = String(body?.dni || "").replace(/\D/g, "");
+  const guestId = String(body?.guestId || "").trim();
+  const fullName = String(body?.fullName || "").trim();
   const attendance = body?.attendance === "no" ? "no" : "yes";
   const guestsCount = Number(body?.guestsCount || 1);
   const phone = String(body?.phone || "").trim();
   const companions = String(body?.companions || "").trim();
   const message = String(body?.message || "").trim();
 
-  if (!/^\d{8}$/.test(dni)) {
-    return NextResponse.json({ message: "DNI inválido." }, { status: 400 });
+  if (!guestId || !fullName) {
+    return NextResponse.json(
+      { message: "Falta identificar la invitación." },
+      { status: 400 }
+    );
   }
 
   if (!Number.isInteger(guestsCount) || guestsCount < 1 || guestsCount > 10) {
@@ -22,42 +25,34 @@ export async function POST(request: Request) {
     );
   }
 
-  if (!guestsTableName) {
+  if (!rsvpWebhookUrl) {
     return NextResponse.json(
-      { message: "Falta configurar DYNAMODB_GUESTS_TABLE." },
+      { message: "Falta configurar GOOGLE_SHEETS_RSVP_WEBHOOK_URL." },
       { status: 500 }
     );
   }
 
-  try {
-    await dynamo.send(
-      new UpdateCommand({
-        TableName: guestsTableName,
-        Key: { dni },
-        ConditionExpression:
-          "attribute_exists(dni) AND (attribute_not_exists(maxGuests) OR maxGuests >= :guestsCount)",
-        UpdateExpression:
-          "SET attendance = :attendance, guestsCount = :guestsCount, phone = :phone, companions = :companions, message = :message, #status = :status, updatedAt = :updatedAt",
-        ExpressionAttributeNames: {
-          "#status": "status"
-        },
-        ExpressionAttributeValues: {
-          ":attendance": attendance,
-          ":guestsCount": guestsCount,
-          ":phone": phone,
-          ":companions": companions,
-          ":message": message,
-          ":status": attendance === "yes" ? "confirmed" : "declined",
-          ":updatedAt": new Date().toISOString()
-        }
-      })
-    );
+  const response = await fetch(rsvpWebhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      guestId,
+      fullName,
+      attendance,
+      guestsCount,
+      phone,
+      companions,
+      message,
+      updatedAt: new Date().toISOString()
+    })
+  });
 
-    return NextResponse.json({ ok: true });
-  } catch {
+  if (!response.ok) {
     return NextResponse.json(
-      { message: "No pudimos guardar la confirmación para ese DNI o la cantidad excede la invitación." },
-      { status: 404 }
+      { message: "No pudimos guardar la confirmación en Google Sheets." },
+      { status: 502 }
     );
   }
+
+  return NextResponse.json({ ok: true });
 }

@@ -1,52 +1,38 @@
-import { GetCommand } from "@aws-sdk/lib-dynamodb";
 import { NextResponse } from "next/server";
-import { dynamo, guestsTableName, type WeddingGuest } from "@/lib/dynamodb";
+import { getGuestsFromSheet, guestMatches, normalize } from "@/lib/sheets";
 
 export async function POST(request: Request) {
-  const { dni } = await request.json().catch(() => ({ dni: "" }));
-  const normalizedDni = String(dni || "").replace(/\D/g, "");
+  const { search } = await request.json().catch(() => ({ search: "" }));
+  const normalizedSearch = normalize(String(search || ""));
 
-  if (!/^\d{8}$/.test(normalizedDni)) {
+  if (normalizedSearch.length < 3) {
     return NextResponse.json(
-      { message: "Ingresa un DNI válido de 8 dígitos." },
+      { message: "Ingresa el nombre de familia o jefe de familia." },
       { status: 400 }
     );
   }
 
-  if (!guestsTableName) {
+  try {
+    const guests = await getGuestsFromSheet();
+    const guest = guests.find((item) => guestMatches(item, normalizedSearch));
+
+    if (!guest) {
+      return NextResponse.json(
+        { message: "No encontramos ese nombre en la lista de invitados." },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ guest });
+  } catch (error) {
     return NextResponse.json(
-      { message: "Falta configurar DYNAMODB_GUESTS_TABLE." },
+      {
+        message:
+          error instanceof Error
+            ? error.message
+            : "No pudimos leer la lista de invitados."
+      },
       { status: 500 }
     );
   }
-
-  const result = await dynamo.send(
-    new GetCommand({
-      TableName: guestsTableName,
-      Key: { dni: normalizedDni }
-    })
-  );
-
-  if (!result.Item) {
-    return NextResponse.json(
-      { message: "No encontramos ese DNI en la lista de invitados." },
-      { status: 404 }
-    );
-  }
-
-  const guest = result.Item as WeddingGuest;
-
-  return NextResponse.json({
-    guest: {
-      dni: guest.dni,
-      fullName: guest.fullName,
-      maxGuests: guest.maxGuests || 1,
-      phone: guest.phone || "",
-      status: guest.status || "pending",
-      attendance: guest.attendance || "",
-      guestsCount: guest.guestsCount || 1,
-      companions: guest.companions || "",
-      message: guest.message || ""
-    }
-  });
 }
