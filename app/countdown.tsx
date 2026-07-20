@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const weddingDate = new Date("2026-11-14T16:00:00-05:00").getTime();
+const weddingDate = new Date("2026-11-14T15:30:00-05:00").getTime();
 
 function getRemainingTime() {
   const diff = Math.max(0, weddingDate - Date.now());

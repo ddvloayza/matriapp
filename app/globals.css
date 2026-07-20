@@ -1,13 +1,13 @@
 :root {
-  --paper: #fdf9f2;
-  --paper-deep: #fff8ee;
-  --cream: #f5f0e6;
-  --gold: #b8940a;
-  --gold-soft: #d4a832;
-  --ink: #5a3c00;
-  --muted: #8f711d;
-  --line: rgba(212, 168, 50, 0.42);
-  --shadow: 0 26px 70px rgba(94, 63, 5, 0.16);
+  --paper: #ffffff;
+  --paper-deep: #f5f7f8;
+  --cream: #eef1f2;
+  --gold: #71828c;
+  --gold-soft: #aebbc1;
+  --ink: #37434a;
+  --muted: #71828c;
+  --line: rgba(113, 130, 140, 0.42);
+  --shadow: 0 26px 70px rgba(55, 67, 74, 0.12);
   --font-cinzel: "Cinzel", Georgia, serif;
   --font-cormorant: "Cormorant Garamond", Georgia, serif;
   --font-great-vibes: "Great Vibes", "Brush Script MT", cursive;
@@ -24,7 +24,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: #f7f0e5;
+  background: #ffffff;
   color: var(--ink);
   font-family: var(--font-cormorant), serif;
 }
@@ -55,7 +55,7 @@ a {
 }
 
 .brand {
-  color: #8a5c00;
+  color: #596b75;
   font-family: var(--font-great-vibes), cursive;
   font-size: clamp(30px, 5vw, 42px);
   line-height: 1;
@@ -73,7 +73,7 @@ a {
 .navLinks a,
 .button {
   border: 1.5px solid var(--gold);
-  background: rgba(253, 249, 242, 0.74);
+  background: rgba(245, 247, 248, 0.82);
   color: var(--ink);
   cursor: pointer;
   display: inline-flex;
@@ -100,7 +100,7 @@ a {
 .button.primary,
 .navLinks a:hover {
   background: var(--gold);
-  color: var(--paper);
+  color: #ffffff;
 }
 
 .button:hover {
@@ -117,11 +117,15 @@ a {
   grid-template-columns: 1fr;
 }
 
+.invitationPage {
+  width: min(1240px, calc(100% - 32px));
+}
+
 .invitationCard,
 .panel {
   position: relative;
   border: 2px solid var(--gold);
-  background: rgba(253, 249, 242, 0.96);
+  background: rgba(255, 255, 255, 0.98);
   box-shadow: var(--shadow);
 }
 
@@ -130,14 +134,289 @@ a {
   align-content: center;
   width: 100%;
   min-height: 760px;
+  overflow: hidden;
   padding: 74px 62px 62px;
   text-align: center;
 }
 
+.invitationCard::before,
+.invitationCard::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.invitationCard::before {
+  inset: 26px 48px;
+  border: 1px solid var(--line);
+  clip-path: polygon(12% 0, 88% 0, 100% 50%, 88% 100%, 12% 100%, 0 50%);
+}
+
+.invitationCard::after {
+  inset: 48px 76px;
+  border: 1px solid rgba(113, 130, 140, 0.26);
+  clip-path: polygon(11% 0, 89% 0, 100% 50%, 89% 100%, 11% 100%, 0 50%);
+}
+
+.invitationContent {
+  position: relative;
+  z-index: 1;
+  width: min(820px, 100%);
+  margin: 0 auto;
+  padding: 18px 0 0;
+}
+
+.introText {
+  width: min(620px, 100%);
+  margin: 0 auto;
+  color: var(--ink);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.announcement {
+  margin: 16px 0 18px;
+  color: var(--muted);
+  font-family: var(--font-cinzel), serif;
+  font-size: 18px;
+  letter-spacing: 5px;
+}
+
+.weekday,
+.monthBlock {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-cinzel), serif;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+}
+
+.weekday {
+  font-size: 14px;
+}
+
+.monthBlock {
+  display: grid;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.monthBlock small {
+  font-size: 12px;
+  letter-spacing: 7px;
+}
+
+.eventSummary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 42px;
+  margin: 36px auto 24px;
+}
+
+.eventSummary h2 {
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-family: var(--font-cinzel), serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.eventSummary p {
+  margin: 5px 0;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.eventSummary small {
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.dressCode {
+  display: grid;
+  gap: 7px;
+  width: min(560px, 100%);
+  margin: 0 auto;
+  padding-top: 22px;
+  border-top: 2px solid var(--line);
+}
+
+.dressCode p {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-cinzel), serif;
+  font-size: 13px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.dressCode span {
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.invitationActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: min(620px, 100%);
+  margin: 30px auto 0;
+  text-align: center;
+}
+
+.invitationActions .button {
+  width: 100%;
+}
+
+.compactEventSummary {
+  width: min(720px, 100%);
+  margin-top: 28px;
+}
+
+.pillButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: #ffffff;
+  padding: 12px 26px;
+  font-family: var(--font-cinzel), serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.qrLink {
+  display: grid;
+  justify-items: center;
+  color: var(--ink);
+  text-align: center;
+  text-decoration: none;
+}
+
+.fakeQr {
+  width: 116px;
+  aspect-ratio: 1;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, var(--ink) 10px, transparent 10px) 12px 12px / 22px 22px,
+    linear-gradient(var(--ink) 10px, transparent 10px) 12px 12px / 22px 22px,
+    linear-gradient(90deg, transparent 8px, var(--ink) 8px 14px, transparent 14px) 0 0 / 28px 28px,
+    linear-gradient(transparent 8px, var(--ink) 8px 14px, transparent 14px) 0 0 / 28px 28px,
+    #ffffff;
+}
+
+.qrLink strong {
+  margin-top: 8px;
+  font-family: var(--font-cinzel), serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.qrLink small {
+  width: 150px;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.flowerCluster {
+  position: absolute;
+  z-index: 2;
+  width: 180px;
+  height: 170px;
+  pointer-events: none;
+}
+
+.flowerTop {
+  top: -20px;
+  left: -20px;
+}
+
+.flowerBottom {
+  right: -20px;
+  bottom: -20px;
+  transform: rotate(180deg);
+}
+
+.flowerCluster i {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  background: #6f8794;
+  box-shadow: inset 0 0 0 8px rgba(255, 255, 255, 0.12);
+}
+
+.flowerCluster i::after {
+  content: "";
+  position: absolute;
+  inset: 28%;
+  border-radius: 50%;
+  border: 8px solid rgba(38, 49, 58, 0.2);
+}
+
+.flowerCluster i:nth-child(1) {
+  width: 96px;
+  height: 96px;
+  left: 0;
+  top: 0;
+}
+
+.flowerCluster i:nth-child(2) {
+  width: 72px;
+  height: 72px;
+  left: 96px;
+  top: 28px;
+}
+
+.flowerCluster i:nth-child(3) {
+  width: 66px;
+  height: 66px;
+  left: 36px;
+  top: 110px;
+}
+
+.flowerCluster b {
+  position: absolute;
+  display: block;
+  width: 34px;
+  height: 14px;
+  border-radius: 50%;
+  background: #7e8f98;
+  opacity: 0.82;
+}
+
+.flowerCluster b:nth-of-type(1) {
+  left: 142px;
+  top: 6px;
+  transform: rotate(24deg);
+}
+
+.flowerCluster b:nth-of-type(2) {
+  left: 138px;
+  top: 102px;
+  transform: rotate(62deg);
+}
+
+.flowerCluster b:nth-of-type(3) {
+  left: 8px;
+  top: 142px;
+  transform: rotate(114deg);
+}
+
 .countdownPanel {
   margin-top: 18px;
-  border: 2px solid var(--gold);
-  background: rgba(253, 249, 242, 0.92);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.96);
   box-shadow: var(--shadow);
   padding: 24px 28px 28px;
   text-align: center;
@@ -160,7 +439,7 @@ a {
 }
 
 .timeBox strong {
-  color: #8a5c00;
+  color: var(--ink);
   font-family: var(--font-cinzel), serif;
   font-size: clamp(28px, 5vw, 48px);
   line-height: 1;
@@ -178,7 +457,7 @@ a {
 .innerBorder {
   position: absolute;
   inset: 16px;
-  border: 0.5px solid rgba(212, 168, 50, 0.46);
+  border: 0.5px solid rgba(113, 130, 140, 0.46);
   pointer-events: none;
 }
 
@@ -231,7 +510,7 @@ a {
 
 .eyebrow,
 .sectionTitle {
-  color: #8a6a10;
+  color: var(--muted);
   font-family: var(--font-cinzel), serif;
   font-size: 10px;
   letter-spacing: 5px;
@@ -248,7 +527,7 @@ a {
 
 .subtle {
   margin: 0;
-  color: #6b4f18;
+  color: var(--ink);
   font-size: 18px;
   font-style: italic;
   letter-spacing: 0.4px;
@@ -267,19 +546,19 @@ a {
   width: 110px;
   max-width: 28%;
   height: 0.5px;
-  background: linear-gradient(90deg, transparent, #c9922a, transparent);
+  background: linear-gradient(90deg, transparent, #9aaab1, transparent);
 }
 
 .divider span {
   width: 6px;
   height: 6px;
-  background: #c9922a;
+  background: #9aaab1;
   transform: rotate(45deg);
 }
 
 .names {
   margin: 12px 0;
-  color: #8a5c00;
+  color: #596b75;
   font-family: var(--font-great-vibes), cursive;
   font-size: clamp(48px, 8vw, 76px);
   font-weight: 400;
@@ -298,7 +577,7 @@ a {
 
 .dateBlock strong {
   display: block;
-  color: #8a5c00;
+  color: #596b75;
   font-family: var(--font-cinzel), serif;
   font-size: clamp(58px, 11vw, 82px);
   letter-spacing: 6px;
@@ -308,7 +587,7 @@ a {
 .dateBlock span {
   display: block;
   margin-top: 8px;
-  color: #a07820;
+  color: #71828c;
   font-family: var(--font-cinzel), serif;
   font-size: 14px;
   letter-spacing: 7px;
@@ -330,7 +609,7 @@ a {
 }
 
 .detailsLine small {
-  color: #b09040;
+  color: #71828c;
   font-family: var(--font-cinzel), serif;
   font-size: 8px;
   letter-spacing: 4px;
@@ -338,7 +617,7 @@ a {
 }
 
 .detailsLine span {
-  color: #7a5000;
+  color: #596b75;
   font-size: 20px;
   font-style: italic;
 }
@@ -346,7 +625,7 @@ a {
 .detailsLine i {
   width: 0.5px;
   height: 36px;
-  background: linear-gradient(180deg, transparent, rgba(201, 146, 42, 0.55), transparent);
+  background: linear-gradient(180deg, transparent, rgba(113, 130, 140, 0.55), transparent);
 }
 
 .sectionGrid {
@@ -381,7 +660,7 @@ a {
 
 .infoBox h2 {
   margin: 0 0 5px;
-  color: #8a5c00;
+  color: var(--gold);
   font-family: var(--font-cinzel), serif;
   font-size: 12px;
   letter-spacing: 2px;
@@ -391,7 +670,7 @@ a {
 
 .infoBox p {
   margin: 0;
-  color: #7a5000;
+  color: var(--ink);
   font-size: 18px;
   font-style: italic;
   line-height: 1.35;
@@ -441,7 +720,7 @@ a {
 
 .paymentCardButton:hover {
   border-color: var(--gold);
-  background: #fffaf0;
+  background: #eef1f2;
   transform: translateY(-1px);
 }
 
@@ -450,7 +729,7 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  color: #8a5c00;
+  color: var(--gold);
   font-family: var(--font-cinzel), serif;
   font-size: 10px;
   letter-spacing: 2.5px;
@@ -500,8 +779,8 @@ a {
 
 .paymentActions button {
   border: 1px solid var(--line);
-  background: rgba(253, 249, 242, 0.84);
-  color: #8a5c00;
+  background: rgba(245, 247, 248, 0.9);
+  color: var(--gold);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -535,8 +814,8 @@ a {
   z-index: 40;
   width: 100%;
   border-top: 2px solid var(--gold);
-  background: rgba(253, 249, 242, 0.96);
-  box-shadow: 0 18px 48px rgba(94, 63, 5, 0.2);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 18px 48px rgba(55, 67, 74, 0.16);
   padding: 12px 16px;
 }
 
@@ -549,7 +828,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: 14px;
-  color: #8a6a10;
+  color: var(--gold);
   font-family: var(--font-cinzel), serif;
   font-size: 9px;
   letter-spacing: 3px;
@@ -604,7 +883,7 @@ a {
 
 .footerNote p {
   margin: 0;
-  color: var(--gold);
+  color: var(--muted);
   font-family: var(--font-great-vibes), cursive;
   font-size: 34px;
 }
@@ -695,7 +974,7 @@ a {
 }
 
 .guestWelcome strong {
-  color: #8a5c00;
+  color: var(--gold);
   font-size: 26px;
   font-weight: 600;
 }
@@ -719,6 +998,19 @@ a {
 
   .invitationCard {
     min-height: auto;
+    padding: 72px 62px 54px;
+  }
+
+  .invitationCard::before {
+    inset: 28px 36px;
+  }
+
+  .invitationCard::after {
+    inset: 48px 56px;
+  }
+
+  .eventSummary {
+    gap: 24px;
   }
 
   .giftHeader .button {
@@ -752,9 +1044,120 @@ a {
     text-align: center;
   }
 
-  .invitationCard,
   .panel {
     padding: 40px 22px 34px;
+  }
+
+  .invitationCard {
+    min-height: 720px;
+    padding: 74px 28px 44px;
+  }
+
+  .invitationCard::before {
+    inset: 22px 16px;
+    clip-path: polygon(8% 0, 92% 0, 100% 50%, 92% 100%, 8% 100%, 0 50%);
+  }
+
+  .invitationCard::after {
+    inset: 42px 32px;
+    clip-path: polygon(8% 0, 92% 0, 100% 50%, 92% 100%, 8% 100%, 0 50%);
+  }
+
+  .invitationContent {
+    padding-top: 0;
+  }
+
+  .introText {
+    font-size: 16px;
+  }
+
+  .announcement {
+    font-size: 14px;
+    letter-spacing: 4px;
+  }
+
+  .names {
+    font-size: clamp(58px, 18vw, 82px);
+  }
+
+  .dateBlock {
+    gap: 28px;
+  }
+
+  .eventSummary {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 26px;
+  }
+
+  .dressCode {
+    padding-top: 18px;
+  }
+
+  .dressCode p {
+    font-size: 11px;
+    letter-spacing: 3px;
+  }
+
+  .invitationActions {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .pillButton {
+    width: 100%;
+    max-width: 290px;
+  }
+
+  .flowerCluster {
+    width: 118px;
+    height: 120px;
+  }
+
+  .flowerTop {
+    top: -18px;
+    left: -22px;
+  }
+
+  .flowerBottom {
+    right: -22px;
+    bottom: -18px;
+  }
+
+  .flowerCluster i:nth-child(1) {
+    width: 68px;
+    height: 68px;
+  }
+
+  .flowerCluster i:nth-child(2) {
+    width: 48px;
+    height: 48px;
+    left: 66px;
+    top: 22px;
+  }
+
+  .flowerCluster i:nth-child(3) {
+    width: 46px;
+    height: 46px;
+    left: 22px;
+    top: 74px;
+  }
+
+  .flowerCluster b:nth-of-type(1) {
+    left: 92px;
+    top: 4px;
+  }
+
+  .flowerCluster b:nth-of-type(2) {
+    left: 88px;
+    top: 72px;
+  }
+
+  .flowerCluster b:nth-of-type(3) {
+    left: 3px;
+    top: 94px;
   }
 
   .countdownPanel {
@@ -812,7 +1215,7 @@ a {
     font-size: 10px;
     letter-spacing: 1.8px;
     text-transform: uppercase;
-    box-shadow: 0 12px 34px rgba(94, 63, 5, 0.22);
+  box-shadow: 0 12px 34px rgba(55, 67, 74, 0.16);
     pointer-events: auto;
   }
 
@@ -821,7 +1224,7 @@ a {
     place-items: center;
     width: 20px;
     height: 20px;
-    border: 1px solid rgba(253, 249, 242, 0.52);
+    border: 1px solid rgba(255, 255, 255, 0.7);
     font-family: var(--font-cormorant), serif;
     font-size: 16px;
     font-style: normal;
@@ -841,8 +1244,8 @@ a {
     width: 100%;
     max-width: none;
     border-top: 2px solid var(--gold);
-    background: rgba(253, 249, 242, 0.98);
-    box-shadow: 0 18px 48px rgba(94, 63, 5, 0.2);
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 18px 48px rgba(55, 67, 74, 0.16);
     padding: 10px;
     pointer-events: auto;
   }

@@ -4,9 +4,9 @@ import FloatingPayments from "./floating-payments";
 
 export default function Home() {
   return (
-    <main className="page">
+    <main className="page invitationPage">
       <nav className="nav" aria-label="Navegación principal">
-        <div className="brand">Julio & Jackeline</div>
+        <div className="brand">Julio &amp; Jackeline</div>
         <div className="navLinks">
           <Link href="/confirmar">Confirma tu asistencia</Link>
           <Link href="/regalos">Regalos</Link>
@@ -21,7 +21,7 @@ export default function Home() {
           <Divider />
           <h1 id="titulo-boda" className="names">
             Julio Isaac
-            <span>&</span>
+            <span>&amp;</span>
             Jackeline Haydee
           </h1>
           <Divider />
@@ -35,7 +35,7 @@ export default function Home() {
           <div className="detailsLine">
             <div>
               <small>Hora</small>
-              <span>4:00 p.m.</span>
+              <span>3:30 p.m.</span>
             </div>
             <i />
             <div>
@@ -43,28 +43,32 @@ export default function Home() {
               <span>Religiosa</span>
             </div>
           </div>
+
+          <div className="invitationActions">
+            <Link className="button primary" href="/confirmar">
+              Confirma tu asistencia
+            </Link>
+            <Link className="button" href="/regalos">
+              Regalos
+            </Link>
+          </div>
+
+          <div className="eventSummary compactEventSummary">
+            <div>
+              <h2>Ceremonia</h2>
+              <p>Basílica de María Auxiliadora</p>
+              <small>Av. Brasil 210 - Breña · 3:30 p.m.</small>
+            </div>
+            <div>
+              <h2>Recepción</h2>
+              <p>Calle Osa Mayor 118 - Santiago de Surco</p>
+              <small>Espalda del Jockey Plaza · 6:30 p.m.</small>
+            </div>
+          </div>
         </article>
       </section>
 
       <Countdown />
-
-      <section id="detalles" className="sectionGrid">
-        <article className="panel">
-          <p className="sectionTitle">Ceremonia</p>
-          <div className="infoBox">
-            <h2>Basílica de María Auxiliadora</h2>
-            <p>4:00 p.m. - Lima, Perú</p>
-          </div>
-        </article>
-
-        <article className="panel">
-          <p className="sectionTitle">Recepción</p>
-          <div className="infoBox">
-            <h2>Calle Osa Mayor 118</h2>
-            <p>Santiago de Surco, Lima<br />6:30 p.m.<br />A espaldas del Jockey Plaza</p>
-          </div>
-        </article>
-      </section>
 
       <footer className="footerNote">
         <p>Con amor, los esperamos</p>
