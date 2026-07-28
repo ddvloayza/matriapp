@@ -924,6 +924,16 @@ a {
   font-style: italic;
 }
 
+.sheetWarning {
+  border: 1px solid rgba(184, 83, 78, 0.28);
+  background: rgba(184, 83, 78, 0.08);
+  color: #8f3f3b;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 14px 0 0;
+  padding: 10px 12px;
+}
+
 .paymentCard {
   border: 1px solid var(--line);
   background: var(--paper-deep);

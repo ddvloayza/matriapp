@@ -135,13 +135,19 @@ export async function getGiftsFromSheet(): Promise<SheetGift[]> {
     throw new Error("Falta configurar GOOGLE_SHEETS_GIFTS_CSV_URL.");
   }
 
-  const response = await fetch(giftsCsvUrl, { next: { revalidate: 30 } });
+  const response = await fetch(giftsCsvUrl, { cache: "no-store" });
 
   if (!response.ok) {
     throw new Error("No pudimos leer la lista de regalos de Google Sheets.");
   }
 
-  const rows = parseCsv(await response.text());
+  const csv = await response.text();
+
+  if (csv.trimStart().startsWith("<!DOCTYPE html") || csv.includes("Accede a tu cuenta de Google")) {
+    throw new Error("La hoja de regalos no esta publicada como CSV publico.");
+  }
+
+  const rows = parseCsv(csv);
   const [headers = [], ...body] = rows;
 
   return body

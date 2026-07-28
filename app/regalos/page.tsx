@@ -5,16 +5,22 @@ import { gifts } from "../gifts";
 import { getGiftsFromSheet, giftsCsvUrl } from "@/lib/sheets";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function RegalosPage() {
   let listedGifts = gifts;
+  let sheetWarning = "";
 
   if (giftsCsvUrl) {
     try {
       const sheetGifts = await getGiftsFromSheet();
       if (sheetGifts.length) listedGifts = sheetGifts;
-    } catch {
+    } catch (error) {
       // Keep the local list visible if the sheet is temporarily unavailable.
+      sheetWarning =
+        error instanceof Error
+          ? error.message
+          : "No pudimos leer la lista actualizada de Google Sheets.";
     }
   }
 
@@ -58,6 +64,11 @@ export default async function RegalosPage() {
               elegirlo juntos a nuestro gusto y así iniciar esta nueva etapa.
             </p>
             <DonateLink />
+            {sheetWarning ? (
+              <p className="sheetWarning" role="status">
+                {sheetWarning}
+              </p>
+            ) : null}
           </div>
         </div>
 
