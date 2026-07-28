@@ -19,10 +19,13 @@ Copia `env.example` a `.env.local` y completa:
 
 ```bash
 GOOGLE_SHEETS_GUESTS_CSV_URL=https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/export?format=csv&gid=0
+GOOGLE_SHEETS_GIFTS_CSV_URL=https://docs.google.com/spreadsheets/d/1V_E8vivQVUk_AJIB3ib2l4EGo0IHVVtyCZvzqcQyn4Q/export?format=csv&gid=0
 GOOGLE_SHEETS_RSVP_WEBHOOK_URL=https://script.google.com/macros/s/APPS_SCRIPT_DEPLOYMENT_ID/exec
 ```
 
-`GOOGLE_SHEETS_GUESTS_CSV_URL` debe apuntar a la pestaña pública de invitados en formato CSV. `GOOGLE_SHEETS_RSVP_WEBHOOK_URL` debe apuntar a un Apps Script publicado como web app para registrar confirmaciones.
+`GOOGLE_SHEETS_GUESTS_CSV_URL` debe apuntar a la pestaña pública de invitados en formato CSV. `GOOGLE_SHEETS_GIFTS_CSV_URL` debe apuntar a la pestaña pública de regalos en formato CSV. La hoja de regalos acepta las columnas `Regalo`, `Detalle`, `Estado` y `Separado por`; cuando `Estado` sea `Separado`, el regalo se muestra tachado y aparece el nombre de la persona. `GOOGLE_SHEETS_RSVP_WEBHOOK_URL` debe apuntar a un Apps Script publicado como web app para registrar confirmaciones.
+
+La pestaña de regalos debe estar publicada para lectura web en Google Sheets. En Google Sheets usa `Archivo > Compartir > Publicar en la web`, selecciona la pestaña de regalos y formato CSV. Si la hoja no es pública, Google devolverá una pantalla de acceso en vez de los datos.
 
 ## Google Sheets
 

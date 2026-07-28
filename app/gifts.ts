@@ -5,6 +5,7 @@ export type Gift = {
   name: string;
   detail?: string;
   taken: boolean;
+  reservedBy?: string;
 };
 
 export const gifts: Gift[] = [

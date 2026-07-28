@@ -2,8 +2,22 @@ import Link from "next/link";
 import FloatingPayments from "../floating-payments";
 import DonateLink from "./donate-link";
 import { gifts } from "../gifts";
+import { getGiftsFromSheet, giftsCsvUrl } from "@/lib/sheets";
 
-export default function RegalosPage() {
+export const dynamic = "force-dynamic";
+
+export default async function RegalosPage() {
+  let listedGifts = gifts;
+
+  if (giftsCsvUrl) {
+    try {
+      const sheetGifts = await getGiftsFromSheet();
+      if (sheetGifts.length) listedGifts = sheetGifts;
+    } catch {
+      // Keep the local list visible if the sheet is temporarily unavailable.
+    }
+  }
+
   return (
     <main className="page giftsPage">
       <nav className="nav" aria-label="Navegación principal">
@@ -48,7 +62,7 @@ export default function RegalosPage() {
         </div>
 
         <div className="giftGrid">
-          {gifts.map((gift) => (
+          {listedGifts.map((gift) => (
             <div
               className={`giftCard${gift.taken ? " giftCardTaken" : ""}`}
               key={gift.name}
@@ -58,6 +72,9 @@ export default function RegalosPage() {
                 {gift.detail ? (
                   <small className="giftDetail">{gift.detail}</small>
                 ) : null}
+                {gift.taken && gift.reservedBy ? (
+                  <small className="giftReservedBy">Separado por: {gift.reservedBy}</small>
+                ) : null}
               </span>
 
               <span
@@ -65,7 +82,7 @@ export default function RegalosPage() {
                   }`}
               >
                 <span className="giftStatusDot" aria-hidden="true" />
-                {gift.taken ? "No Disponible" : "Disponible"}
+                {gift.taken ? "Separado" : "Disponible"}
               </span>
             </div>
           ))}

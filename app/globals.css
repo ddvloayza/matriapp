@@ -918,6 +918,12 @@ a {
   opacity: 0.7;
 }
 
+.giftReservedBy {
+  color: var(--muted);
+  font-size: 13px;
+  font-style: italic;
+}
+
 .paymentCard {
   border: 1px solid var(--line);
   background: var(--paper-deep);

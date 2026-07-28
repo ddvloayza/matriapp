@@ -13,7 +13,17 @@ export type SheetGuest = {
 };
 
 const guestsCsvUrl = process.env.GOOGLE_SHEETS_GUESTS_CSV_URL || "";
+const defaultGiftsCsvUrl =
+  "https://docs.google.com/spreadsheets/d/1V_E8vivQVUk_AJIB3ib2l4EGo0IHVVtyCZvzqcQyn4Q/export?format=csv&gid=0";
+export const giftsCsvUrl = process.env.GOOGLE_SHEETS_GIFTS_CSV_URL || defaultGiftsCsvUrl;
 export const rsvpWebhookUrl = process.env.GOOGLE_SHEETS_RSVP_WEBHOOK_URL || "";
+
+export type SheetGift = {
+  name: string;
+  detail: string;
+  taken: boolean;
+  reservedBy: string;
+};
 
 export function normalize(value: string) {
   return value
@@ -118,6 +128,53 @@ export async function getGuestsFromSheet() {
       message: getCell(record, ["message", "mensaje"])
     };
   });
+}
+
+export async function getGiftsFromSheet(): Promise<SheetGift[]> {
+  if (!giftsCsvUrl) {
+    throw new Error("Falta configurar GOOGLE_SHEETS_GIFTS_CSV_URL.");
+  }
+
+  const response = await fetch(giftsCsvUrl, { next: { revalidate: 30 } });
+
+  if (!response.ok) {
+    throw new Error("No pudimos leer la lista de regalos de Google Sheets.");
+  }
+
+  const rows = parseCsv(await response.text());
+  const [headers = [], ...body] = rows;
+
+  return body
+    .map((row) => {
+      const record = Object.fromEntries(
+        headers.map((header, cellIndex) => [header, row[cellIndex] || ""])
+      );
+      const status = normalize(getCell(record, ["status", "estado"]));
+      const reservedBy = getCell(record, [
+        "reservedBy",
+        "reservadoPor",
+        "separadoPor",
+        "separado por",
+        "persona",
+        "nombrePersona"
+      ]);
+
+      return {
+        name: getCell(record, ["name", "regalo", "nombreRegalo", "gift", "item"]),
+        detail: getCell(record, ["detail", "detalle", "descripcion", "descripción"]),
+        taken: [
+          "separado",
+          "separada",
+          "reservado",
+          "reservada",
+          "taken",
+          "unavailable",
+          "no disponible"
+        ].includes(status),
+        reservedBy
+      };
+    })
+    .filter((gift) => gift.name);
 }
 
 export function guestMatches(guest: SheetGuest, query: string) {
