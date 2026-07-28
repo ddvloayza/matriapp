@@ -5,13 +5,6 @@ import FloatingPayments from "./floating-payments";
 export default function Home() {
   return (
     <main className="page invitationPage">
-      <nav className="nav" aria-label="Navegación principal">
-        <div className="brand">Julio &amp; Jackeline</div>
-        <div className="navLinks">
-          <Link href="/regalos">Regalos</Link>
-        </div>
-      </nav>
-
       <section className="hero" aria-labelledby="titulo-boda">
         <article className="invitationCard">
           <OrnamentCorners />
