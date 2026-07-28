@@ -23,10 +23,21 @@ export default function RegalosPage() {
               Con mucho cariño hemos preparado esta lista con cosas que nos
               encantaría tener para nuestro nuevo hogar.
             </p>
-            <p className="subtle">
-              Si alguno de los obsequios te gusta, puedes hacérnoslo saber para
-              reservarlo.
-            </p>
+            <div className="giftNote" role="note">
+              <span className="giftNoteIcon" aria-hidden="true">✦</span>
+              <p>
+                ¿Elegiste uno de la lista?{" "}
+                <a
+                  className="giftNoteLink"
+                  href="https://wa.me/51951223994?text=%C2%A1Hola!%20Quisiera%20reservar%20un%20regalo%20de%20la%20lista%20de%20Julio%20y%20Jackeline%20%F0%9F%8E%81"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Avísanos por WhatsApp
+                </a>{" "}
+                para reservarlo a tu nombre y así evitamos que se repita.
+              </p>
+            </div>
             <p className="subtle">
               Y si prefieres apoyarnos con un detalle en efectivo según tu
               posibilidad, también lo recibiremos con el mismo amor para poder

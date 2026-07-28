@@ -238,26 +238,53 @@ a {
 
 .dressCode {
   display: grid;
-  gap: 7px;
+  justify-items: center;
+  gap: 9px;
   width: min(560px, 100%);
-  margin: 0 auto;
-  padding-top: 22px;
+  margin: 32px auto 0;
+  padding-top: 26px;
   border-top: 2px solid var(--line);
+  text-align: center;
 }
 
 .dressCode p {
   margin: 0;
-  color: var(--ink);
+  color: var(--muted);
   font-family: var(--font-cinzel), serif;
   font-size: 13px;
   letter-spacing: 5px;
   text-transform: uppercase;
 }
 
+.dressCodeMain {
+  margin: 2px 0 4px;
+  color: var(--gold);
+  font-family: var(--font-cinzel), serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  text-indent: 8px;
+}
+
 .dressCode span {
+  max-width: 440px;
   color: var(--ink);
   font-size: 15px;
-  line-height: 1.3;
+  line-height: 1.4;
+}
+
+.dressCode span strong {
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.dressCodeThanks {
+  margin-top: 4px;
+  font-family: var(--font-cormorant), serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--muted);
 }
 
 .invitationActions {
@@ -692,6 +719,73 @@ a {
 
 .giftHeader .sectionTitle {
   margin-bottom: 2px;
+}
+
+.giftNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 2px 0;
+  padding: 14px 18px;
+  border: 1px solid var(--gold);
+  border-left: 4px solid var(--gold);
+  border-radius: 6px;
+  background: rgba(113, 130, 140, 0.08);
+}
+
+.giftNoteIcon {
+  flex: 0 0 auto;
+  color: var(--gold);
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.giftNote p {
+  margin: 0;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+}
+
+.giftNote strong {
+  color: var(--gold);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.giftNote em {
+  font-style: italic;
+  color: #b8534e;
+}
+
+.giftNoteLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #1f8f5f;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+  transition: color 0.2s ease;
+}
+
+.giftNoteLink::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background-color: #1f8f5f;
+  -webkit-mask: center / contain no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.16c-.24.68-1.42 1.32-1.95 1.37-.5.05-1.13.24-3.7-.77-3.11-1.23-5.09-4.4-5.25-4.6-.15-.2-1.25-1.66-1.25-3.17s.79-2.25 1.07-2.56c.28-.31.61-.38.81-.38.2 0 .41 0 .58.01.19.01.44-.07.68.52.24.6.83 2.06.9 2.21.07.15.12.32.02.52-.1.2-.15.32-.29.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.35 1.46.29.15.46.12.63-.07.17-.2.73-.85.93-1.14.2-.29.39-.24.66-.15.27.1 1.71.81 2 .96.29.15.49.22.56.34.07.12.07.68-.17 1.36z'/%3E%3C/svg%3E");
+  mask: center / contain no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.16c-.24.68-1.42 1.32-1.95 1.37-.5.05-1.13.24-3.7-.77-3.11-1.23-5.09-4.4-5.25-4.6-.15-.2-1.25-1.66-1.25-3.17s.79-2.25 1.07-2.56c.28-.31.61-.38.81-.38.2 0 .41 0 .58.01.19.01.44-.07.68.52.24.6.83 2.06.9 2.21.07.15.12.32.02.52-.1.2-.15.32-.29.5-.15.17-.31.39-.44.52-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.35 1.46.29.15.46.12.63-.07.17-.2.73-.85.93-1.14.2-.29.39-.24.66-.15.27.1 1.71.81 2 .96.29.15.49.22.56.34.07.12.07.68-.17 1.36z'/%3E%3C/svg%3E");
+  flex: 0 0 auto;
+}
+
+.giftNoteLink:hover {
+  color: #14663f;
 }
 
 .donateLink {

@@ -54,6 +54,34 @@ export default function Home() {
               <small>Espalda del Jockey Plaza · 6:30 p.m.</small>
             </div>
           </div>
+
+          <div className="dressCode">
+            <p>Estacionamiento</p>
+            <span>
+              El local de la recepción cuenta con estacionamiento.
+            </span>
+            <a
+              className="giftNoteLink"
+              href="https://wa.me/51951223994?text=%C2%A1Hola!%20Quisiera%20consultar%20la%20disponibilidad%20de%20estacionamiento%20para%20la%20recepci%C3%B3n%20de%20Julio%20y%20Jackeline%20%F0%9F%9A%97"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Consulta la disponibilidad por WhatsApp
+            </a>
+          </div>
+
+          <div className="dressCode">
+            <p>Código de vestimenta</p>
+            <span className="dressCodeMain">Elegante</span>
+            <span>
+              El color <strong>blanco</strong> es solo para la novia y el color{" "}
+              <strong>acero</strong> para el novio.
+            </span>
+            <span>Celebración solo para adultos.</span>
+            <span className="dressCodeThanks">
+              Con cariño, gracias por su comprensión.
+            </span>
+          </div>
         </article>
       </section>
 
