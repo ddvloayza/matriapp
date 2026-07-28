@@ -30,7 +30,7 @@ export const gifts: Gift[] = [
   { name: "Licuadora marca Oster", detail: "Vaso de vidrio", taken: false },
   { name: "Cafetera + Waflera + Hervidor eléctrico", taken: false },
   { name: "Freidora de aire marca Oster o Imaco", taken: true },
-  { name: "Juego de ollas Tramontina", taken: true },
+  { name: "Juego de ollas Tramontina", taken: false },
   { name: "Juego de Sartenes de Teflón", taken: false },
   { name: "Ventilador + Aspiradora", taken: false },
   { name: "Arrocera 3 Kg + Batidora", taken: false },
@@ -39,7 +39,7 @@ export const gifts: Gift[] = [
   { name: "Juego de Cuchillos de Acero Inoxidable marca Tramontina", taken: false },
   { name: "Juego de Cubiertos marca Tramontina", taken: false },
   { name: "Toallas", detail: "Set completo · Colores claros", taken: false },
-  { name: "Juego de Copas para vino y champán", taken: true },
+  { name: "Juego de Copas para vino y champán", taken: false },
   {
     name: "Organizadores de Bambú",
     detail: "Para clóset, baño y dormitorio",
