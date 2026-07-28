@@ -42,7 +42,12 @@ export default function RegalosPage() {
               className={`giftCard${gift.taken ? " giftCardTaken" : ""}`}
               key={gift.name}
             >
-              <span className="giftName">{gift.name}</span>
+              <span className="giftName">
+                <span className="giftNameText">{gift.name}</span>
+                {gift.detail ? (
+                  <small className="giftDetail">{gift.detail}</small>
+                ) : null}
+              </span>
 
               <span
                 className={`giftStatus ${gift.taken ? "giftStatusTaken" : "giftStatusAvailable"
