@@ -8,7 +8,6 @@ export default function Home() {
       <nav className="nav" aria-label="Navegación principal">
         <div className="brand">Julio &amp; Jackeline</div>
         <div className="navLinks">
-          <Link href="/confirmar">Confirma tu asistencia</Link>
           <Link href="/regalos">Regalos</Link>
         </div>
       </nav>
@@ -45,10 +44,7 @@ export default function Home() {
           </div>
 
           <div className="invitationActions">
-            <Link className="button primary" href="/confirmar">
-              Confirma tu asistencia
-            </Link>
-            <Link className="button" href="/regalos">
+            <Link className="button primary" href="/regalos">
               Regalos
             </Link>
           </div>

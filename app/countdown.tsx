@@ -16,10 +16,13 @@ function getRemainingTime() {
   };
 }
 
+const zeroTime = { days: 0, hours: 0, minutes: 0, seconds: 0 };
+
 export default function Countdown() {
-  const [time, setTime] = useState(getRemainingTime);
+  const [time, setTime] = useState(zeroTime);
 
   useEffect(() => {
+    setTime(getRemainingTime());
     const interval = window.setInterval(() => setTime(getRemainingTime()), 1000);
     return () => window.clearInterval(interval);
   }, []);

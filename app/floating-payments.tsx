@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Payment = {
   label: string;
@@ -35,6 +35,19 @@ const payments: Payment[] = [
 export default function FloatingPayments() {
   const [copied, setCopied] = useState("");
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOpen = () => {
+      setOpen(true);
+      window.setTimeout(() => {
+        document
+          .querySelector(".floatingPayments")
+          ?.scrollIntoView({ behavior: "smooth", block: "end" });
+      }, 60);
+    };
+    window.addEventListener("open-donations", handleOpen);
+    return () => window.removeEventListener("open-donations", handleOpen);
+  }, []);
 
   async function copyText(value: string, label: string) {
     try {
