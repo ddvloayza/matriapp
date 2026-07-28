@@ -20,18 +20,36 @@ export const gifts: Gift[] = [
   },
   { name: 'Televisor para Sala 65" o 75" marca LG', taken: false },
   { name: "Soundbar marca LG", taken: false },
+  { name: "Terma a Gas marca Sole", taken: false },
   { name: "Olla a presión marca Record o Oster", taken: false },
   {
     name: "Microondas marca LG o Samsung",
     detail: "Consultar medidas",
-    taken: true
+    taken: false
   },
   { name: "Licuadora marca Oster", detail: "Vaso de vidrio", taken: false },
   { name: "Cafetera + Waflera + Hervidor eléctrico", taken: false },
   { name: "Freidora de aire marca Oster o Imaco", taken: false },
   { name: "Juego de ollas Tramontina", taken: false },
+  { name: "Juego de Sartenes de Teflón", taken: false },
   { name: "Ventilador + Aspiradora", taken: false },
-  { name: "Arrocera 3 Kg", taken: false },
+  { name: "Arrocera 3 Kg + Batidora", taken: false },
   { name: "Tetera de acero inoxidable + Juego de Tazas", taken: false },
-  { name: "Plancha de ropa marca Oster + Planchador", taken: false }
+  { name: "Plancha de ropa marca Oster + Planchador", taken: false },
+  { name: "Juego de Cuchillos de Acero Inoxidable marca Tramontina", taken: false },
+  { name: "Juego de Cubiertos marca Tramontina", taken: false },
+  { name: "Toallas", detail: "Set completo · Colores claros", taken: false },
+  { name: "Juego de Copas para vino y champán", taken: false },
+  {
+    name: "Organizadores de Bambú",
+    detail: "Para clóset, baño y dormitorio",
+    taken: false
+  },
+  { name: "2 Mesas de noche o veladores", taken: false },
+  {
+    name: "Juego de Sábanas + cubrecama para Cama Queen",
+    detail: "Colores claros",
+    taken: false
+  },
+  { name: "Mesa de Centro para Sala", detail: "Consultar medidas", taken: false }
 ];
