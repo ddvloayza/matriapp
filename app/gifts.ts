@@ -21,7 +21,7 @@ export const gifts: Gift[] = [
   },
   { name: 'Televisor para Sala 65" o 75" marca LG', taken: true },
   { name: 'Televisor 55" marca LG', taken: false },
-  { name: "Mesa para oficina", detail: 'consultar medidas y colores', taken: false },
+  { name: "Escritorio para oficina", detail: 'consultar medidas y colores', taken: false },
   { name: 'Silla gamer para oficina', detail: "consultar colores", taken: false },
   { name: "Soundbar 440W marca LG", taken: false },
   { name: "Terma a Gas marca Sole", taken: false },
@@ -56,10 +56,4 @@ export const gifts: Gift[] = [
     taken: false
   },
   { name: "Mesa de Centro para Sala", detail: "Consultar medidas", taken: false },
-  { name: "Escritorio de oficina", detail: "Consultar medidas", taken: false },
-  {
-    name: "Silla para escritorio ergonómica",
-    detail: "Color negro",
-    taken: false
-  }
 ];
