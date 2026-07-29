@@ -1,31 +1,23 @@
 import Link from "next/link";
 import FloatingPayments from "../floating-payments";
 import DonateLink from "./donate-link";
-import { gifts } from "../gifts";
-import { getGiftsFromSheet, giftsApiUrl, normalize } from "@/lib/sheets";
+import { getGiftsFromSheet, type SheetGift } from "@/lib/sheets";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function RegalosPage() {
-  let listedGifts = gifts;
+  // La hoja de Google Sheets es la única fuente de la lista de regalos.
+  let listedGifts: SheetGift[] = [];
   let sheetWarning = "";
 
-  if (giftsApiUrl) {
-    try {
-      const sheetGifts = await getGiftsFromSheet();
-      if (sheetGifts.length) {
-        const sheetGiftNames = new Set(sheetGifts.map((gift) => normalize(gift.name)));
-        const localOnlyGifts = gifts.filter((gift) => !sheetGiftNames.has(normalize(gift.name)));
-        listedGifts = [...sheetGifts, ...localOnlyGifts];
-      }
-    } catch (error) {
-      // Keep the local list visible if the sheet is temporarily unavailable.
-      sheetWarning =
-        error instanceof Error
-          ? error.message
-          : "No pudimos leer la lista actualizada de Google Sheets.";
-    }
+  try {
+    listedGifts = await getGiftsFromSheet();
+  } catch (error) {
+    sheetWarning =
+      error instanceof Error
+        ? error.message
+        : "No pudimos leer la lista de regalos de Google Sheets.";
   }
 
   return (
@@ -76,6 +68,12 @@ export default async function RegalosPage() {
           </div>
         </div>
 
+        {listedGifts.length === 0 ? (
+          <p className="giftsEmpty" role="status">
+            La lista de regalos no está disponible en este momento. Vuelve a
+            intentarlo en unos minutos.
+          </p>
+        ) : (
         <div className="giftGrid">
           {listedGifts.map((gift) => (
             <div
@@ -102,6 +100,7 @@ export default async function RegalosPage() {
             </div>
           ))}
         </div>
+        )}
       </section>
 
       <FloatingPayments />
