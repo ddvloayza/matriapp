@@ -2,7 +2,7 @@ import Link from "next/link";
 import FloatingPayments from "../floating-payments";
 import DonateLink from "./donate-link";
 import { gifts } from "../gifts";
-import { getGiftsFromSheet, giftsApiUrl } from "@/lib/sheets";
+import { getGiftsFromSheet, giftsApiUrl, normalize } from "@/lib/sheets";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -14,7 +14,11 @@ export default async function RegalosPage() {
   if (giftsApiUrl) {
     try {
       const sheetGifts = await getGiftsFromSheet();
-      if (sheetGifts.length) listedGifts = sheetGifts;
+      if (sheetGifts.length) {
+        const sheetGiftNames = new Set(sheetGifts.map((gift) => normalize(gift.name)));
+        const localOnlyGifts = gifts.filter((gift) => !sheetGiftNames.has(normalize(gift.name)));
+        listedGifts = [...sheetGifts, ...localOnlyGifts];
+      }
     } catch (error) {
       // Keep the local list visible if the sheet is temporarily unavailable.
       sheetWarning =
