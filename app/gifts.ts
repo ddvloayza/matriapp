@@ -21,7 +21,7 @@ export const gifts: Gift[] = [
   },
   { name: 'Televisor para Sala 65" o 75" marca LG', taken: true },
   { name: 'Televisor 55" marca LG', taken: false },
-  { name: "Soundbar marca LG", taken: false },
+  { name: "Soundbar 440W marca LG", taken: false },
   { name: "Terma a Gas marca Sole", taken: false },
   { name: "Olla a presión marca Record o Oster", taken: false },
   {
