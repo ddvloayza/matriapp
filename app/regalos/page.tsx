@@ -2,7 +2,7 @@ import Link from "next/link";
 import FloatingPayments from "../floating-payments";
 import DonateLink from "./donate-link";
 import { gifts } from "../gifts";
-import { getGiftsFromSheet, giftsCsvUrl } from "@/lib/sheets";
+import { getGiftsFromSheet, giftsApiUrl } from "@/lib/sheets";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -11,7 +11,7 @@ export default async function RegalosPage() {
   let listedGifts = gifts;
   let sheetWarning = "";
 
-  if (giftsCsvUrl) {
+  if (giftsApiUrl) {
     try {
       const sheetGifts = await getGiftsFromSheet();
       if (sheetGifts.length) listedGifts = sheetGifts;

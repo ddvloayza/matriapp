@@ -13,9 +13,9 @@ export type SheetGuest = {
 };
 
 const guestsCsvUrl = process.env.GOOGLE_SHEETS_GUESTS_CSV_URL || "";
-const defaultGiftsCsvUrl =
-  "https://docs.google.com/spreadsheets/d/1V_E8vivQVUk_AJIB3ib2l4EGo0IHVVtyCZvzqcQyn4Q/export?format=csv&gid=0";
-export const giftsCsvUrl = process.env.GOOGLE_SHEETS_GIFTS_CSV_URL || defaultGiftsCsvUrl;
+const defaultGiftsApiUrl =
+  "https://script.google.com/macros/s/AKfycbzSyqCQqzMAOeNASjDR30XfARkPSmsn8n-LJ2SpmBzCvjV2qd7VifDXWIOE3hpWxGOWDg/exec";
+export const giftsApiUrl = process.env.GOOGLE_SHEETS_GIFTS_API_URL || defaultGiftsApiUrl;
 export const rsvpWebhookUrl = process.env.GOOGLE_SHEETS_RSVP_WEBHOOK_URL || "";
 
 export type SheetGift = {
@@ -131,29 +131,29 @@ export async function getGuestsFromSheet() {
 }
 
 export async function getGiftsFromSheet(): Promise<SheetGift[]> {
-  if (!giftsCsvUrl) {
-    throw new Error("Falta configurar GOOGLE_SHEETS_GIFTS_CSV_URL.");
+  if (!giftsApiUrl) {
+    throw new Error("Falta configurar GOOGLE_SHEETS_GIFTS_API_URL.");
   }
 
-  const response = await fetch(giftsCsvUrl, { cache: "no-store" });
+  const response = await fetch(giftsApiUrl, { cache: "no-store" });
 
   if (!response.ok) {
     throw new Error("No pudimos leer la lista de regalos de Google Sheets.");
   }
 
-  const csv = await response.text();
+  const json = await response.json();
 
-  if (csv.trimStart().startsWith("<!DOCTYPE html") || csv.includes("Accede a tu cuenta de Google")) {
-    throw new Error("La hoja de regalos no esta publicada como CSV publico.");
+  if (!Array.isArray(json)) {
+    throw new Error("La respuesta de regalos no tiene el formato esperado.");
   }
 
-  const rows = parseCsv(csv);
-  const [headers = [], ...body] = rows;
-
-  return body
-    .map((row) => {
+  return json
+    .map((item) => {
       const record = Object.fromEntries(
-        headers.map((header, cellIndex) => [header, row[cellIndex] || ""])
+        Object.entries(item as Record<string, unknown>).map(([key, value]) => [
+          key,
+          value === undefined || value === null ? "" : String(value)
+        ])
       );
       const status = normalize(getCell(record, ["status", "estado"]));
       const reservedBy = getCell(record, [
