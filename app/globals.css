@@ -945,6 +945,44 @@ a {
   text-align: center;
 }
 
+.giftsLoading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 48px auto 40px;
+  color: var(--muted);
+}
+
+.giftsLoading p {
+  margin: 0;
+  font-family: var(--font-cinzel), serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.giftsSpinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid var(--line);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: giftsSpin 0.9s linear infinite;
+}
+
+@keyframes giftsSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .giftsSpinner {
+    animation-duration: 2.2s;
+  }
+}
+
 .paymentCard {
   border: 1px solid var(--line);
   background: var(--paper-deep);
