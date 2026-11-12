@@ -50,8 +50,8 @@ export default function Home() {
             </div>
             <div>
               <h2>Recepción</h2>
-              <p>Calle Osa Mayor 118 - Santiago de Surco</p>
-              <small>Espalda del Jockey Plaza · 6:30 p.m.</small>
+              <p>Jr. Paseo de los Eucaliptos 328 - La Molina</p>
+              <small>A una cuadra del Skate Park La Molina · 6:30 p.m.</small>
             </div>
           </div>
 
